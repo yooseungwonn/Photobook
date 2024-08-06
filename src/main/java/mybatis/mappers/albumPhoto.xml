@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="albumPhoto">
+	<insert id="insert" parameterType="AlbumPhotoVo">
+		INSERT INTO ALBUM_PHOTO(ALBUM_PHOTO_ID, ALBUM_ID, PHOTO_PATH, ALBUM_PHOTO_TYPE)
+		VALUES
+		(SEQ_ALBUM_PHOTO_PK.nextval, #{albumId}, #{photoPath}, #{albumPhotoType})
+	</insert>
+	<update id="updatePath" parameterType="AlbumPhotoVo">
+		UPDATE ALBUM_PHOTO 
+		SET PHOTO_PATH = #{photoPath}
+		WHERE ALBUM_ID = #{albumId}
+	</update>
+	<select id="getAlbumPhotoPath" parameterType="String" resultType="String">
+		SELECT 
+			PHOTO_PATH
+		FROM ALBUM_PHOTO
+		WHERE ALBUM_ID = #{value}
+	</select>
+	<delete id="delete" parameterType="String">
+		DELETE ALBUM_PHOTO WHERE ALBUM_ID = #{value}
+	</delete> 
+	
+</mapper>

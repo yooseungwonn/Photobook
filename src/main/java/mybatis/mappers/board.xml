@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="board">
+	<select id="selectAll" resultType="BoardVo">
+		SELECT BOARD_ID AS boardId,
+		TITLE, CONTENT,REG_DATE as regDate, USER_ID as userId , STATUS
+		FROM BOARD
+		ORDER
+		BY regDate desc
+	</select>
+
+	<insert id="insert" parameterType="BoardVo">
+		<selectKey keyProperty="boardId" resultType="long"
+			order="BEFORE">
+			SELECT seq_board_pk.nextval from dual
+		</selectKey>
+		INSERT INTO BOARD(BOARD_ID, TITLE, CONTENT, USER_ID)
+		VALUES
+		(SEQ_BOARD_PK.nextval, #{title}, #{content}, #{userId})
+	</insert>
+	
+	  <select id="getContent" parameterType="map" resultType="BoardVo">
+      SELECT
+      BOARD_ID as boardId, TITLE, CONTENT,USER_ID as userId
+      FROM BOARD
+      WHERE
+      USER_ID=#{userId} AND BOARD_ID = #{boardId}
+   </select>
+	
+	<!-- 이름으로 관리자 게시물 검색 -->
+	<select id="getContentById" parameterType="String" resultType="BoardVo">
+		SELECT BOARD_ID as boardId, TITLE, CONTENT, REG_DATE as regDate ,USER_ID as userId, STATUS
+		FROM BOARD 
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<update id="update" parameterType="BoardVo">
+		UPDATE BOARD
+		SET TITLE=#{title}, CONTENT=#{content}
+		WHERE USER_ID = #{userId} AND BOARD_ID = #{boardId}
+	</update>
+	<update id="updateStatus" parameterType="BoardVo">
+		UPDATE BOARD SET STATUS='처리 완료'
+		WHERE BOARD_ID = #{boardId}
+	</update>
+	<delete id="delete" parameterType="map">
+		DELETE FROM BOARD WHERE USER_ID = #{userId} AND BOARD_ID = #{boardId}
+	</delete>
+
+	<select id="countBoard" resultType ="String">
+    SELECT COUNT(BOARD_ID) AS BOARD_count
+	FROM BOARD
+	where status = '처리중'
+	</select>
+	<!-- 전체 게시물 조회 -->
+	 <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM inventory
+    </select>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shipments">
+	<select id="selectAll" resultType="ShipmentsVo">
+		SELECT
+		SHIPMENT_ID as shipmentId,
+		ORDER_ID as orderId,
+		SHIPMENT_DATE as shipmentDate,
+		SHIPMENT_STATUS as shipmentStatus
+		FROM
+		SHIPMENTS
+		ORDER BY
+		shipmentDate DESC
+	</select>
+
+	<select id="selectStatusByOrderID" parameterType="String"
+		resultType="String">
+		SELECT
+		SHIPMENT_STATUS as shipmentStatus
+		FROM
+		SHIPMENTS
+		WHERE
+		ORDER_ID = #{value}
+	</select>
+
+	<select id="selectShipmentInfoByOrderID" parameterType="String"
+		resultType="ShipmentsVo">
+		SELECT
+		SHIPMENT_ID as shipmentId,
+		ORDER_ID as orderId,
+		SHIPMENT_DATE as shipmentDate,
+		SHIPMENT_STATUS as shipmentStatus
+		FROM
+		SHIPMENTS
+		WHERE
+		ORDER_ID = #{value}
+		ORDER BY
+		shipmentDate DESC
+	</select>
+
+	<select id="searchAllByOrderId" parameterType="String"
+		resultType="ShipmentsVo">
+		SELECT
+		SHIPMENT_ID as shipmentId,
+		ORDER_ID as orderId,
+		SHIPMENT_DATE as shipmentDate,
+		SHIPMENT_STATUS as shipmentStatus
+		FROM
+		SHIPMENTS
+		WHERE
+		ORDER_ID LIKE ('%' || #{value} || '%')
+	</select>
+
+	<update id="updateDateAndStatusByShipmentId"
+		parameterType="ShipmentsVo">
+		UPDATE SHIPMENTS
+		SET SHIPMENT_STATUS = #{shipmentStatus},
+		SHIPMENT_DATE = #{shipmentDate}
+		WHERE SHIPMENT_ID=#{shipmentId}
+	</update>
+
+	<insert id="insert" parameterType="String">
+		INSERT INTO SHIPMENTS
+		(SHIPMENT_ID, ORDER_ID, SHIPMENT_DATE, SHIPMENT_STATUS)
+		VALUES (
+		NVL(NULL, SEQ_SHIPMENTS_PK.NEXTVAL), #{value},
+		SYSDATE, 'A'
+		)
+	</insert>
+
+	<select id="countShipment" resultType="String">
+		SELECT COUNT(SHIPMENT_ID) AS shipment_count
+		FROM shipments
+		where shipment_status = 'A'
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM SHIPMENTS
+		WHERE ORDER_ID = #{orderId}
+	</delete>
+	
+</mapper>

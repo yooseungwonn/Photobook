@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="refund">
+	<select id="selectStatusByOrderID" parameterType="String" resultType="String">
+		SELECT 
+			REFUND_STATUS
+		FROM
+		 	REFUND
+		WHERE
+			ORDER_ID = #{value}
+	</select>
+	<select id="selectAllRefunds" resultType="RefundVo">
+		SELECT 
+			REFUND_ID as refundId,
+			ORDER_ID as orderId,
+			REFUND_STATUS as refundStatus
+		FROM
+		 	REFUND
+	</select>
+	<insert id="insert" parameterType="String">
+		INSERT INTO REFUND (REFUND_ID, ORDER_ID, REFUND_STATUS)
+			VALUES (NVL(NULL, SEQ_REFUND_PK.NEXTVAL), #{value},'P'
+			)
+    </insert>
+    <update id="updateStatus" parameterType="RefundVo">
+		UPDATE REFUND 
+			SET REFUND_STATUS = #{refundStatus}
+		WHERE ORDER_ID = #{orderId}
+	</update>
+	<delete id="delete">
+		DELETE FROM REFUND
+		WHERE ORDER_ID = #{orderId}
+	</delete>
+	<select id="selectOneByOrderId" parameterType="String" resultType="RefundVo">
+		SELECT 
+			REFUND_ID as refundId,
+			ORDER_ID as orderId,
+			REFUND_STATUS as refundStatus
+		FROM
+		 	REFUND
+		WHERE
+			ORDER_ID = #{value}
+	</select>
+	
+	<select id ="countRefund" resultType="String">
+	SELECT COUNT(REFUND_ID) AS refund_count
+	FROM refund
+	where refund_status ='P'
+	</select>
+	
+</mapper>

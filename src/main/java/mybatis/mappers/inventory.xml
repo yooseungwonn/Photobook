@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="inventory">
+   <select id="findAlbumPriceByAlbumId" parameterType="map" resultType="InventoryVo">
+    	select ALBUM_ID as albumId ,album_price as albumPrice, A_QUANTITY as aQuantity
+    	from inventory
+    	where album_id = #{albumId}
+   	</select>
+    <!-- listInventory 메서드를 위한 매핑 추가 -->
+    <select id="listInventory" resultType="InventoryVo">
+        SELECT 
+            ALBUM_ID as albumId,
+            ALBUM_PRICE as albumPrice,
+            A_QUANTITY as aQuantity
+        FROM inventory
+        order by albumId
+    </select>
+    
+    <update id="updateQuantity" parameterType="InventoryVo">
+		UPDATE INVENTORY 
+			SET A_QUANTITY = #{aQuantity}
+		WHERE ALBUM_ID=#{albumId} 
+	</update>
+     <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM inventory
+    </select>
+    
+    <update id="updatePrice" parameterType="InventoryVo">
+		UPDATE INVENTORY
+		SET ALBUM_PRICE = #{albumPrice}
+		WHERE
+			ALBUM_ID = #{albumId}
+	</update>
+	
+	<delete id="deleteInventory">
+		DELETE FROM INVENTORY
+		WHERE ALBUM_ID = #{albumId}
+	</delete>
+	
+	<insert id="insertInventory" parameterType="InventoryVo">
+    INSERT INTO INVENTORY (ALBUM_ID, ALBUM_PRICE, A_QUANTITY)
+    VALUES (
+        #{albumId},
+        #{albumPrice},
+        #{aQuantity}
+    )
+</insert>
+    <select id="selectOneByAlbumId" parameterType="String" resultType="InventoryVo">
+        SELECT 
+        	ALBUM_ID as albumId, 
+        	ALBUM_PRICE as albumPrice,
+        	A_QUANTITY as aQuantity
+		FROM INVENTORY
+		WHERE ALBUM_ID = #{value}
+    </select>
+
+</mapper>

@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
+}
+.auth-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    width: 300px;
+}
+h2 {
+    text-align: center;
+    color: #333;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+button {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.signup-link, .login-link, .social-login {
+    text-align: center;
+    margin-top: 15px;
+}
+.social-login button {
+    margin: 5px;
+    width: 100%;
+}

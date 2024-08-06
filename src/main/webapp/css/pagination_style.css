@@ -1,0 +1,53 @@
+/* 페이지네이션 컨테이너 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* 페이지네이션 링크 스타일 */
+.pagination a {
+    text-decoration: none;
+    color: #007bff; /* 링크 색상 */
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #007bff; /* 링크 테두리 색상 */
+    border-radius: 4px; /* 링크 모서리 둥글게 */
+    font-size: 16px; /* 폰트 크기 */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 페이지네이션 링크 호버 스타일 */
+.pagination a:hover {
+    background-color: #007bff; /* 호버 시 배경색 */
+    color: white; /* 호버 시 글자색 */
+}
+
+/* 현재 페이지 스타일 */
+.pagination span {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #007bff; /* 현재 페이지 테두리 색상 */
+    border-radius: 4px; /* 현재 페이지 모서리 둥글게 */
+    font-size: 16px;
+    background-color: #007bff; /* 현재 페이지 배경색 */
+    color: white; /* 현재 페이지 글자색 */
+}
+
+/* 페이지네이션 버튼 스타일 */
+.pagination a:first-child {
+    border-radius: 4px 0 0 4px; /* 왼쪽 버튼 모서리 둥글게 */
+}
+
+.pagination a:last-child {
+    border-radius: 0 4px 4px 0; /* 오른쪽 버튼 모서리 둥글게 */
+}
+
+/* 페이지네이션 버튼 크기 조절 */
+.pagination a, .pagination span {
+    font-size: 14px;
+    line-height: 1.5;
+    display: inline-block;
+    text-align: center;
+}

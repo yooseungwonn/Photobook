@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<!-- 별칭 등록 -->
+	<typeAliases>
+		<typeAlias 
+			type="himedia.photobook.repositories.vo.UsersVo"
+			alias="UsersVo" />
+		<typeAlias
+			type="himedia.photobook.repositories.vo.AlbumVo"
+			alias="AlbumVo" />
+		<typeAlias
+			type="himedia.photobook.repositories.vo.InventoryVo"
+			alias="InventoryVo" />
+		<typeAlias
+			type="himedia.photobook.repositories.vo.OrdersVo"
+			alias="OrdersVo" />
+		<typeAlias 
+			type="himedia.photobook.repositories.vo.ShipmentsVo"
+			alias="ShipmentsVo" />
+		<typeAlias 
+			type="himedia.photobook.repositories.vo.RefundVo"
+			alias="RefundVo" />
+		<typeAlias 
+			type="himedia.photobook.repositories.vo.BoardVo"
+			alias="BoardVo" />
+		<typeAlias type="himedia.photobook.repositories.vo.CommentsVo"
+			alias="CommentsVo" />
+		<typeAlias type="himedia.photobook.repositories.vo.PhotoVo"
+			alias="PhotoVo" />
+		<typeAlias type="himedia.photobook.repositories.vo.AlbumPhotoVo"
+			alias="AlbumPhotoVo" />
+	</typeAliases>
+	
+	
+	<!-- MyBatis 매퍼 -->
+	<mappers> 
+		<mapper resource="mybatis/mappers/users.xml" />
+		<mapper resource="mybatis/mappers/album.xml" />
+		<mapper resource="mybatis/mappers/inventory.xml" />
+		<mapper resource="mybatis/mappers/order.xml" />
+		<mapper resource="mybatis/mappers/shipments.xml" />
+		<mapper resource="mybatis/mappers/refund.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/comments.xml"/>
+		<mapper resource="mybatis/mappers/photo.xml"/>
+		<mapper resource="mybatis/mappers/albumPhoto.xml"/>
+	</mappers>
+</configuration>
